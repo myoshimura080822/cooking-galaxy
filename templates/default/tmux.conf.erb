@@ -1,0 +1,22 @@
+
+# local
+set-window-option -g utf8 on
+
+# scroll
+set-window-option -g mode-mouse on
+
+# copy
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+
+# history size
+set-option -g history-limit 10000
+
+## Keybind
+unbind-key C-b
+set-option -g prefix C-w
+bind-key C-w send-prefix
+
+bind-key r source-file ~/.tmux.conf\; display-message "source-file ~/.tmux.conf"

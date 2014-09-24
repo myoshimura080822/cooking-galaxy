@@ -1,0 +1,18 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  #- name: ubuntu-12.04
+  - name: centos
+    driver_config:
+      image: centos:centos6
+
+suites:
+  - name: default
+    run_list:
+      - recipe[galaxy::default]
+    attributes:
