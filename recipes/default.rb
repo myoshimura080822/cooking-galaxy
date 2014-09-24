@@ -44,3 +44,42 @@ service "galaxy" do
     action [:enable, :start]
     supports :status => true, :restart => true, :reload => true
 end
+
+# install and setting tmux
+include_recipe "yum"
+## add the EPEL repo
+yum_repository 'epel' do
+  description 'Extra Packages for Enterprise Linux'
+  mirrorlist 'http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=$basearch'
+  gpgkey 'http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6'
+  action :create
+end
+package "tmux"
+template "/.tmux.conf" do
+        path "/.tmux.conf"
+        source "tmux.conf.erb"
+        owner "root"
+        group "root"
+        mode 0644
+end
+
+# install and setting nginx
+package "nginx"
+service "nginx" do
+  supports status: true, restart: true, reload: true
+  action [:enable, :start]
+end
+template "/etc/nginx/conf.d/default.conf" do
+        path "/etc/nginx/conf.d/default.conf"
+        source "nginx.conf.erb"
+        owner "root"
+        group "root"
+        mode 0644
+        notifies :reload,'service[nginx]'
+end
+
+# install wget
+package "wget"
+
+# install vim
+include_recipe "vim"
