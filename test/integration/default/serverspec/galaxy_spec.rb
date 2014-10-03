@@ -34,3 +34,13 @@ end
 describe command('/sbin/chkconfig | grep galaxy') do
   its(:stdout) { should include('galaxy') }
 end
+
+#-----------------------------------------test for java
+describe package("java") do
+  it { should be_installed }
+end
+
+describe command('java -version') do
+  it { should return_stdout /.*1.7/ }
+end
+

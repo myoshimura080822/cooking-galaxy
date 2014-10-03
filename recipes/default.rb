@@ -89,3 +89,6 @@ package "wget"
 
 # install vim
 include_recipe "vim"
+
+# install java
+include_recipe "java"
