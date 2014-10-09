@@ -23,6 +23,11 @@ directory node[:galaxy][:home] do
 end
 
 include_recipe "python"
+# install drmaa for gridengine
+python_pip "drmaa" do
+    action :install
+end
+
 include_recipe "mercurial"
 mercurial node[:galaxy][:path] do
     repository node[:galaxy][:repository]
